@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+
+        </div>
+        <div class="navbar-right">
+            <a href="#home">Home</a>
+            <a href="{{ url_for('nav') }}">About Us</a>
+<a href="{{ url_for('nav') }}">Contact Us</a>
+
+        </div>
+    </nav>
+<body>
+<div class="bd" ><center>
+    <h1>Enter The Below Details</h1>
+<br><br>
+    <form action="/predict" method="POST">
+        <label for="N">Nitrogen (N):</label>
+        <input type="number" step="any" name="N" required><br><br>
+
+        <label for="P">Phosphorous (P):</label>
+        <input type="number" step="any" name="P" required><br><br>
+
+        <label for="K">Potassium (K):</label>
+        <input type="number" step="any" name="K" required><br><br>
+
+        <label for="temperature">Temperature (°C):</label>
+        <input type="number" step="any" name="temperature" required><br><br>
+
+        <label for="humidity">Humidity (%):</label>
+        <input type="number" step="any" name="humidity" required><br><br>
+
+        <label for="ph">Soil pH:</label>
+        <input type="number" step="any" name="ph" required><br><br>
+
+        <button type="submit">Predict Crop</button>
+    </form>
+</center>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+/* Resetting margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Styling the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d2e31;
+    padding: 4px 8px;
+}
+
+/* Title styling */
+.navbar-left img {
+  width: 50%;
+}
+
+/* Right-side links */
+.navbar-right a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar-right a:hover {
+    color: #FACF39;
+}
+body {
+
+background: url(bgimage[1].png) center center/cover repeat;
+}
+.bd{
+background-size: auto;
+    border: black;
+    
+}
+/* Main content section styling */
+main {
+    padding: 20px;
+    min-height: 100vh;
+}
+label {
+    color: azure;
+    text-shadow: 1px 3px 4px #0b0b0b;
+}
+h1{
+    color: azure;
+    text-shadow: 1px 3px 4px #0b0b0b;
+}
+h2 {
+    margin-bottom: 10px;
+    color: azure;
+    text-shadow: 1px 3px 4px #0b0b0b;
+}
+img{
+    color: azure;
+    text-shadow: 1px 3px 4px #0b0b0b;
+}
+
+p {
+    line-height: 1.6;
+    color: azure;
+    text-shadow: 1px 3px 4px #0b0b0b;
+}
