@@ -19,6 +19,7 @@
 The **Best Crop Recommendation System** is a web-based application designed to recommend the best crop to plant based on soil conditions, weather, and other environmental factors. This project uses machine learning to analyze input data and provide accurate and data-driven recommendations to farmers and agricultural enthusiasts.
 
 ## Project Structure
+```
 project/
 ├── app.py
 ├── templates/
@@ -33,7 +34,7 @@ project/
 │   │   └── placeholder.jpg
 ├── xgboost_model.pkl
 └── label_encoder.pkl
-
+```
 ## Features
 - User-friendly interface for data input and results.
 - Predicts the best crop to plant based on environmental factors.
