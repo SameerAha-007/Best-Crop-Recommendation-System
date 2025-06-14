@@ -1,13 +1,19 @@
 from flask import Flask, request, render_template, jsonify
 import numpy as np
 import joblib
+from pymongo import MongoClient
+from datetime import datetime  # for timestamp
 
-# Load the saved model and label encoder
+# Load model and label encoder
 model = joblib.load('xgboost_model.pkl')
 label_encoder = joblib.load('label_encoder.pkl')
 
 app = Flask(__name__)
 
+# MongoDB connection
+client = MongoClient("mongodb+srv://skshdjdhsj:BMFMmPbxHBW4e6jV@cluster.i9x2fg8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster")
+db = client['crop_prediction_db']
+collection = db['predictions']
 # Define crop details and image URLs
 crop_data = {
     'rice': {'details': 'Rice is a staple food.', 'image_url': '/static/images/rice.jpg'},
@@ -45,16 +51,16 @@ crop_data = {
 
 @app.route('/')
 def index():
-    return render_template('index.html')  # Render the input form
+    return render_template('index.html')
+
 @app.route('/nav')
 def nav():
-    return render_template('nav.html')  # Render nav.html template
-
+    return render_template('nav.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # Get data from the form
+        # Get form data
         N = float(request.form['N'])
         P = float(request.form['P'])
         K = float(request.form['K'])
@@ -62,22 +68,32 @@ def predict():
         humidity = float(request.form['humidity'])
         ph = float(request.form['ph'])
 
-        # Create a NumPy array for the input
+        # Prepare input for model
         data = np.array([[N, P, K, temperature, humidity, ph]])
 
-        # Predict using the model
+        # Make prediction
         prediction = model.predict(data)
-
-        # Decode the label to the original value
         original_label = label_encoder.inverse_transform(prediction)[0]
 
-        # Get crop details and image URL from the dictionary
+        # Get crop info
         crop_info = crop_data.get(original_label, {
             'details': 'No details available.',
             'image_url': '/static/images/placeholder.jpg'
         })
 
-        # Render the result page with prediction, details, and image
+        # Store in MongoDB
+        collection.insert_one({
+            "timestamp": datetime.utcnow(),
+            "input": {
+                "N": N, "P": P, "K": K,
+                "temperature": temperature,
+                "humidity": humidity,
+                "ph": ph
+            },
+            "prediction": original_label
+        })
+
+        # Show result page
         return render_template(
             'result.html',
             prediction=original_label,
