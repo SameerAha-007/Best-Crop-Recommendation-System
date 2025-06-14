@@ -1,5 +1,7 @@
 # Best Crop Recommendation System
 
+# Live on [RENDER](https://best-crop-recommendation-system.onrender.com)
+
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Table of Contents
