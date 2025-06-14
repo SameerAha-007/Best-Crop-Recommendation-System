@@ -3,7 +3,7 @@ import numpy as np
 import joblib
 from pymongo import MongoClient
 from datetime import datetime  # for timestamp
-
+import os
 # Load model and label encoder
 model = joblib.load('xgboost_model.pkl')
 label_encoder = joblib.load('label_encoder.pkl')
@@ -11,7 +11,7 @@ label_encoder = joblib.load('label_encoder.pkl')
 app = Flask(__name__)
 
 # MongoDB connection
-client = MongoClient("mongodb+srv://skshdjdhsj:BMFMmPbxHBW4e6jV@cluster.i9x2fg8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster")
+client = MongoClient(os.environ.get("MONGO_URI"))
 db = client['crop_prediction_db']
 collection = db['predictions']
 # Define crop details and image URLs
